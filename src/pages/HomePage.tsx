@@ -44,12 +44,18 @@ const HomePage = () => {
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Discover Amazing Places</h1>
           <p className="text-xl md:text-2xl mb-8">Explore top destinations with our premium tour packages</p>
-          <div className="flex justify-center">
+          <div className="flex justify-center space-x-4">
             <Link 
               to="/tours" 
               className="bg-primary text-white px-8 py-3 rounded-md hover:bg-primary/90 transition duration-300 font-medium"
             >
               Browse Tours
+            </Link>
+            <Link 
+              to="/register" 
+              className="bg-white text-primary px-8 py-3 rounded-md hover:bg-gray-100 transition duration-300 font-medium"
+            >
+              Register Now
             </Link>
           </div>
         </div>
@@ -80,10 +86,10 @@ const HomePage = () => {
                 </CardContent>
                 <CardFooter>
                   <Link 
-                    to={`/tours/${tour.id}`} 
+                    to={`/book?tour=${tour.id}`} 
                     className="w-full bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition text-center"
                   >
-                    View Details
+                    Book Now
                   </Link>
                 </CardFooter>
               </Card>
@@ -156,7 +162,7 @@ const HomePage = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 
-            to="/register" 
+            to="/login" 
             className="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition duration-300 font-medium"
           >
             Sign Up Now

@@ -4,13 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import TourPackages from './pages/TourPackages';
-import TourDetails from './pages/TourDetails';
-import Dashboard from './pages/Dashboard';
+import BookTour from './pages/BookTour';
+import Feedback from './pages/Feedback';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 import Footer from './components/Footer';
 import { Toaster } from './components/ui/sonner';
-import './App.css';
 
 const App = () => {
   return (
@@ -20,10 +19,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tours" element={<TourPackages />} />
-          <Route path="/tours/:id" element={<TourDetails />} />
+          <Route path="/book" element={<BookTour />} />
+          <Route path="/feedback" element={<Feedback />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
       <Footer />

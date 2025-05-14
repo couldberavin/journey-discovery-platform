@@ -17,6 +17,7 @@ const toursData = [
     location: 'France',
     category: 'City',
     rating: 4.8,
+    availableDates: ['2025-06-15', '2025-07-10', '2025-08-05'],
     image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1000&auto=format&fit=crop'
   },
   {
@@ -28,6 +29,7 @@ const toursData = [
     location: 'Japan',
     category: 'City',
     rating: 4.7,
+    availableDates: ['2025-06-20', '2025-07-15', '2025-08-10'],
     image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1000&auto=format&fit=crop'
   },
   {
@@ -39,6 +41,7 @@ const toursData = [
     location: 'Kenya',
     category: 'Adventure',
     rating: 4.9,
+    availableDates: ['2025-07-05', '2025-08-15', '2025-09-10'],
     image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1000&auto=format&fit=crop'
   },
   {
@@ -50,6 +53,7 @@ const toursData = [
     location: 'Indonesia',
     category: 'Beach',
     rating: 4.6,
+    availableDates: ['2025-06-10', '2025-07-20', '2025-08-25'],
     image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1000&auto=format&fit=crop'
   },
   {
@@ -61,6 +65,7 @@ const toursData = [
     location: 'Peru',
     category: 'Adventure',
     rating: 4.9,
+    availableDates: ['2025-07-10', '2025-08-20', '2025-09-15'],
     image: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=1000&auto=format&fit=crop'
   },
   {
@@ -72,6 +77,7 @@ const toursData = [
     location: 'Greece',
     category: 'Beach',
     rating: 4.8,
+    availableDates: ['2025-06-25', '2025-07-30', '2025-09-05'],
     image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1000&auto=format&fit=crop'
   }
 ];
@@ -165,19 +171,28 @@ const TourPackages = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-gray-600 mb-2">{tour.description}</p>
-                    <div className="flex items-center">
+                    <div className="flex items-center mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-400">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                       </svg>
                       <span className="ml-1 text-sm">{tour.rating}</span>
                     </div>
+                    <div className="text-sm text-gray-600">
+                      <p>Available dates:</p>
+                      <ul className="list-disc pl-5 mt-1">
+                        {tour.availableDates.slice(0, 2).map((date, index) => (
+                          <li key={index}>{date}</li>
+                        ))}
+                        {tour.availableDates.length > 2 && <li>... and more</li>}
+                      </ul>
+                    </div>
                   </CardContent>
                   <CardFooter>
                     <Link 
-                      to={`/tours/${tour.id}`} 
+                      to={`/book?tour=${tour.id}`} 
                       className="w-full bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition text-center"
                     >
-                      View Details
+                      Book Now
                     </Link>
                   </CardFooter>
                 </Card>

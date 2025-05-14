@@ -1,24 +1,12 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This would be connected to auth context in a real app
-  const [userType, setUserType] = useState<'tourist' | 'agency' | null>(null); // For demo purposes
-
-  // Mock login for demo
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setUserType('tourist'); // Just for demo
-  };
-
-  // Mock logout for demo
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUserType(null);
-  };
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <nav className="bg-white shadow-md fixed w-full z-20 top-0 left-0">
@@ -32,34 +20,24 @@ const Navbar = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-            <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary">
+            <Link to="/" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
               Home
             </Link>
-            <Link to="/tours" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary">
-              Tours
+            <Link to="/tours" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/tours') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
+              Tour Packages
             </Link>
-            {isLoggedIn ? (
-              <>
-                <Link to="/dashboard" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary">
-                  Dashboard
-                </Link>
-                <button 
-                  onClick={handleLogout} 
-                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary"
-                >
-                  <LogOut className="h-4 w-4 mr-1" /> Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary">
-                  Login
-                </Link>
-                <Link to="/register" className="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white hover:bg-primary/90">
-                  Register
-                </Link>
-              </>
-            )}
+            <Link to="/book" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/book') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
+              Book a Tour
+            </Link>
+            <Link to="/feedback" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/feedback') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
+              Feedback
+            </Link>
+            <Link to="/login" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/login') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
+              Login/Register
+            </Link>
+            <Link to="/dashboard" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/dashboard') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
+              Dashboard
+            </Link>
           </div>
           
           {/* Mobile menu button */}
@@ -80,55 +58,46 @@ const Navbar = () => {
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link 
               to="/" 
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary"
+              className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link 
               to="/tours" 
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary"
+              className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/tours') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Tours
+              Tour Packages
             </Link>
-            {isLoggedIn ? (
-              <>
-                <Link 
-                  to="/dashboard" 
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <button 
-                  onClick={() => {
-                    handleLogout();
-                    setIsMenuOpen(false);
-                  }}
-                  className="flex w-full items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary"
-                >
-                  <LogOut className="h-4 w-4 mr-1" /> Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link 
-                  to="/login" 
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Login
-                </Link>
-                <Link 
-                  to="/register" 
-                  className="block px-3 py-2 rounded-md text-base font-medium bg-primary text-white hover:bg-primary/90"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Register
-                </Link>
-              </>
-            )}
+            <Link 
+              to="/book" 
+              className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/book') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Book a Tour
+            </Link>
+            <Link 
+              to="/feedback" 
+              className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/feedback') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Feedback
+            </Link>
+            <Link 
+              to="/login" 
+              className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/login') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Login/Register
+            </Link>
+            <Link 
+              to="/dashboard" 
+              className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/dashboard') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Dashboard
+            </Link>
           </div>
         </div>
       )}
