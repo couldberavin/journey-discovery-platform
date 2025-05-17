@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Footer from './components/Footer';
 import { Toaster } from './components/ui/sonner';
+import TourManagement from './components/dashboard/TourManagement';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/tours" element={<TourManagement />} />
         </Routes>
       </div>
       <Footer />

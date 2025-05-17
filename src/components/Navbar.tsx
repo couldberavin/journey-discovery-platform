@@ -7,6 +7,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  
+  // Check if we're on a dashboard path
+  const isDashboardPath = location.pathname.startsWith('/dashboard');
 
   return (
     <nav className="bg-white shadow-md fixed w-full z-20 top-0 left-0">
@@ -35,9 +38,32 @@ const Navbar = () => {
             <Link to="/login" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/login') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
               Login/Register
             </Link>
-            <Link to="/dashboard" className={`px-3 py-2 rounded-md text-sm font-medium ${isActive('/dashboard') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
-              Dashboard
-            </Link>
+            
+            {/* Dashboard dropdown with submenu */}
+            <div className="relative group">
+              <Link 
+                to="/dashboard" 
+                className={`px-3 py-2 rounded-md text-sm font-medium ${isDashboardPath ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+              >
+                Dashboard
+              </Link>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden group-hover:block z-50">
+                <div className="py-1">
+                  <Link 
+                    to="/dashboard" 
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/dashboard/tours" 
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Manage Tours
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
           
           {/* Mobile menu button */}
@@ -91,12 +117,21 @@ const Navbar = () => {
             >
               Login/Register
             </Link>
+            
+            {/* Mobile Dashboard links */}
             <Link 
               to="/dashboard" 
               className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/dashboard') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Dashboard
+            </Link>
+            <Link 
+              to="/dashboard/tours" 
+              className={`block px-3 py-2 rounded-md text-base font-medium ml-4 ${isActive('/dashboard/tours') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Manage Tours
             </Link>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Edit, Trash, Plus } from 'lucide-react';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
 
 // Sample tours data for agency/guide
 const tours = [
@@ -69,10 +70,17 @@ const MyTours = () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">My Tours</h1>
-        <Button onClick={handleAddTour} className="flex items-center">
-          <Plus className="h-4 w-4 mr-1" />
-          Add New Tour
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={handleAddTour} className="flex items-center">
+            <Plus className="h-4 w-4 mr-1" />
+            Add New Tour
+          </Button>
+          <Link to="/dashboard/tours">
+            <Button variant="outline" className="flex items-center">
+              Manage All Tours
+            </Button>
+          </Link>
+        </div>
       </div>
       
       <Card>
