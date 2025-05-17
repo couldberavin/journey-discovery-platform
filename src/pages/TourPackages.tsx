@@ -1,10 +1,11 @@
-
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Button } from '@/components/ui/button';
+import { PlusCircle } from 'lucide-react';
 
 // Sample tour data
 const toursData = [
@@ -85,6 +86,7 @@ const toursData = [
 const TourPackages = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const navigate = useNavigate();
   
   // Filter tours based on search term and selected categories
   const filteredTours = toursData.filter(tour => {
@@ -108,10 +110,26 @@ const TourPackages = () => {
     );
   };
 
+  const handleAddNewTour = () => {
+    navigate('/dashboard/tours');
+  };
+
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-2">Tour Packages</h1>
-      <p className="text-gray-500 mb-8">Explore our wide range of tour packages for your next adventure</p>
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold mb-2">Tour Packages</h1>
+          <p className="text-gray-500">Explore our wide range of tour packages for your next adventure</p>
+        </div>
+        <Button 
+          variant="accent" 
+          onClick={handleAddNewTour}
+          className="flex items-center gap-2 shadow-lg"
+        >
+          <PlusCircle className="h-5 w-5" />
+          Create New Tour
+        </Button>
+      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Sidebar with filters */}
